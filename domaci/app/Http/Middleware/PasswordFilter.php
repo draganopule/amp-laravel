@@ -3,9 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Http\Request;
-
 
 class PasswordFilter
 {
@@ -16,10 +13,14 @@ class PasswordFilter
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next)
+    public function handle($request, Closure $next)
     {
-        if ($request){
-
+        if ($request->header('X-Password') === 'Fortuna Major') {
+            return $next($request);
+        } 
+        else {
+            abort(400, 'Wrong password!');
         }
+        
     }
 }
