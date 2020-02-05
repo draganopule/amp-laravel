@@ -16,4 +16,11 @@ class Hotel extends Model
         'city',
         'country',
     ];
+
+    public function country()
+    {
+        return $this->belongsTo(
+            Country::class
+        );
+    }
 }

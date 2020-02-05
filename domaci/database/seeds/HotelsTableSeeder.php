@@ -18,7 +18,7 @@ class HotelsTableSeeder extends Seeder
             'star' => 5,
             'street_address' => 'Ulica Slobode',
             'city' => 'Podgorica',
-            'country' => 'Montenegro',
+            'country_id' => 1,
         ]);
         Hotel::create([
             'name' => 'Podgorica',
@@ -26,7 +26,7 @@ class HotelsTableSeeder extends Seeder
             'star' => 4,
             'street_address' => 'Svetlane Kane Radević',
             'city' => 'Podgorica',
-            'country' => 'Montenegro',
+            'country_id' => 1,
         ]);
         Hotel::create([
             'name' => 'Adria',
@@ -34,7 +34,7 @@ class HotelsTableSeeder extends Seeder
             'star' => 4,
             'street_address' => 'Ulica 22. Novembra',
             'city' => 'Budva',
-            'country' => 'Montenegro',
+            'country_id' => 1,
         ]);
     }
 }

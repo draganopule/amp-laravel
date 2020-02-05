@@ -74,12 +74,11 @@ Route::middleware('PasswordFilter')->delete('/students/{id}', function($id) {
     return "Student ciji id je $id je obrisan";
 });
 
-Route::get('/hotels', 'Api\HotelsController@index');
+// Route::get('/hotels', 'Api\HotelsController@index');
+// Route::get('/hotels/{hotel}', 'Api\HotelsController@show');
+// Route::post('/hotels', 'Api\HotelsController@store');
+// Route::patch('/hotels/{hotel}', 'Api\HotelsController@update');
+// Route::delete('/hotels/{hotel}', 'Api\HotelsController@destroy');
 
-Route::get('/hotels/{hotel}', 'Api\HotelsController@show');
-
-Route::post('/hotels', 'Api\HotelsController@store');
-
-Route::patch('/hotels/{hotel}', 'Api\HotelsController@update');
-
-Route::delete('/hotels/{hotel}', 'Api\HotelsController@destroy');
+Route::apiResource('/hotels','Api\HotelsController');
+Route::apiResource('/countries','Api\CountriesController');

@@ -10,7 +10,8 @@ class HotelsController extends Controller
 {
     public function index()
     {
-        $hotels = Hotel::all();
+        $hotels = Hotel::with(['country'])
+        ->get();
 
         return response()->json($hotels);
     }
@@ -20,11 +21,14 @@ class HotelsController extends Controller
         $hotel = new Hotel($request->all());
         $hotel->save();
 
+        $hotel->load(['country']);
+
         return response()->json($hotel, 201);
     }
 
     public function show(Hotel $hotel)
     {
+        $hotel->load(['country']);
         return response()->json($hotel);
     } 
 
@@ -32,6 +36,8 @@ class HotelsController extends Controller
     {
         $hotel->fill($request->all());
         $hotel->save();
+
+        $hotel->load(['country']);
         return response()->json($hotel);
     }
 
