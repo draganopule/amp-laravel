@@ -23,4 +23,14 @@ class Hotel extends Model
             Country::class
         );
     }
+
+    public function room_types()
+    {
+        return $this->belongsToMany(
+            RoomType::class,
+            'hotel_room_type',
+            'hotel_id',
+            'room_type_id'
+        );
+    }
 }
