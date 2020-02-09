@@ -5,40 +5,40 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\RoomType;
+use App\Hotel;
 
 class RoomTypesController extends Controller
 {
     public function index()
     {
-        $room_types = RoomType::all();
+        $roomType = RoomType::all();
 
-        return response()->json($room_types);
+        return response()->json($roomType);
     }
 
     public function store(Request $request)
     {
-        $room_type = new RoomType($request->all());
-        $room_type->save();
+        $roomType = new RoomType($request->all());
+        $roomType->save();
 
-        return response()->json($room_type, 201);
+        return response()->json($roomType, 201);
     }
 
-    public function show(RoomType $room_type)
+    public function show(Hotel $hotel, RoomType $roomType)
     {
-        $room_type->load('room_types');
-        return response()->json($room_type);
+        return response()->json($roomType);
     } 
 
-    public function update(Request $request, RoomType $room_type)
+    public function update(Request $request, Hotel $hotel, RoomType $roomType)
     {
-        $room_type->fill($request->all());
-        $room_type->save();
-        return response()->json($room_type);
+        $roomType->fill($request->all());
+        $roomType->save();
+        return response()->json($roomType);
     }
 
-    public function destroy(RoomType $room_type)
+    public function destroy(Hotel $hotel, RoomType $roomType)
     {
-        $room_type->delete();
+        $roomType->delete();
 
         return response()->noContent();
     }

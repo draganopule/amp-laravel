@@ -80,7 +80,7 @@ Route::middleware('PasswordFilter')->delete('/students/{id}', function($id) {
 // Route::patch('/hotels/{hotel}', 'Api\HotelsController@update');
 // Route::delete('/hotels/{hotel}', 'Api\HotelsController@destroy');
 
-//Route::get('/hotels/{hotel}/room-types/{room-types}', 'Api\RoomTypesController@show');
 Route::apiResource('/hotels/{hotel}/room-types','Api\RoomTypesController');
+Route::apiResource('/hotels/{hotel}/rooms','Api\RoomsController');
 Route::apiResource('/hotels','Api\HotelsController');
 Route::apiResource('/countries','Api\CountriesController');
