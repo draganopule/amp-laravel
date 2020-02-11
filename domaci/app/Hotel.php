@@ -24,13 +24,13 @@ class Hotel extends Model
         );
     }
 
-    public function room_types()
+    public function rooms()
     {
-        return $this->belongsToMany(
-            RoomType::class,
-            'hotel_room_type',
-            'hotel_id',
-            'room_type_id'
-        );
+        return $this->hasMany(Room::class);
+    }
+
+    public function roomTypes()
+    {
+        return $this->hasMany(RoomType::class);
     }
 }

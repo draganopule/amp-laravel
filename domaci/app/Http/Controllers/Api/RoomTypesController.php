@@ -9,9 +9,11 @@ use App\Hotel;
 
 class RoomTypesController extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        $roomType = RoomType::all();
+        $roomType = RoomType::with(['hotel'])
+        ->where('hotel_id',$id)
+        ->get();
 
         return response()->json($roomType);
     }
@@ -21,11 +23,14 @@ class RoomTypesController extends Controller
         $roomType = new RoomType($request->all());
         $roomType->save();
 
+        $roomType->load(['hotel']);
+
         return response()->json($roomType, 201);
     }
 
     public function show(Hotel $hotel, RoomType $roomType)
     {
+        $roomType->load(['hotel']);
         return response()->json($roomType);
     } 
 
@@ -33,6 +38,8 @@ class RoomTypesController extends Controller
     {
         $roomType->fill($request->all());
         $roomType->save();
+
+        $roomType->load(['hotel']);
         return response()->json($roomType);
     }
 

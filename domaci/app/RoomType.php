@@ -14,5 +14,18 @@ class RoomType extends Model
         'number_of_guests',
         'price_per_night',
         'description',
+        'hotel_id',
     ];
+
+    public function hotel()
+    {
+        return $this->belongsTo(
+            Hotel::class
+        );
+    }
+
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
+    }
 }
