@@ -29,21 +29,36 @@ class SearchRoomsController extends Controller
                 $request->get('number_of_beds_min')
             );
         }
-       
-        //  $query->with(['hotel']);
 
-         $rooms = $query->with(['hotel'])->withCount('rooms')->get();
-
-        foreach ($rooms as $room) {
-            echo $room->rooms_count . ' ';
+        if($request->has('number_of_bedrooms_min')){
+            $query->where(
+                'number_of_bedrooms',
+                '>=',
+                $request->get('number_of_bedrooms_min')
+            );
+        }
+        if($request->has('number_of_bathrooms_min')){
+            $query->where(
+                'number_of_bathrooms',
+                '>=',
+                $request->get('number_of_bathrooms_min')
+            );
+        }
+        if($request->has('number_of_guests_min')){
+            $query->where(
+                'number_of_guests',
+                '>=',
+                $request->get('number_of_guests_min')
+            );
+        }
+        if($request->has('check_in_date') && $request->has('check_out_date')){
+            
         }
 
-        return response()->json($rooms);
-
-        // $query->with(['hotel'])->withCount('rooms');
+        $query->with(['hotel'])->withCount('rooms');
          
-        // $roomTypes = $query->get();
+        $roomTypes = $query->get();
          
-        //  return response()->json($roomTypes);
+         return response()->json($roomTypes);
     }
 }
