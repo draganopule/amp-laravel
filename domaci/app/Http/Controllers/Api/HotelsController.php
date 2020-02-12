@@ -10,7 +10,7 @@ class HotelsController extends Controller
 {
     public function index()
     {
-        $hotels = Hotel::with(['country'])
+        $hotels = Hotel::with(['country', 'media'])
         ->get();
 
         return response()->json($hotels);
@@ -21,14 +21,19 @@ class HotelsController extends Controller
         $hotel = new Hotel($request->all());
         $hotel->save();
 
-        $hotel->load(['country']);
+        foreach($request->file('pictures') as $picture){
+            $hotel->addMedia($picture)
+            ->toMediaCollection();
+        }
+
+        $hotel->load(['country', 'media']);
 
         return response()->json($hotel, 201);
     }
 
     public function show(Hotel $hotel)
     {
-        $hotel->load(['country']);
+        $hotel->load(['country', 'media']);
         return response()->json($hotel);
     } 
 
@@ -37,7 +42,12 @@ class HotelsController extends Controller
         $hotel->fill($request->all());
         $hotel->save();
 
-        $hotel->load(['country']);
+        foreach($request->file('pictures', []) as $picture){
+            $hotel->addMedia($picture)
+            ->toMediaCollection();
+        }
+
+        $hotel->load(['country', 'media']);
         return response()->json($hotel);
     }
 

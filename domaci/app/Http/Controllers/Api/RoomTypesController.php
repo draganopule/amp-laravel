@@ -11,7 +11,7 @@ class RoomTypesController extends Controller
 {
     public function index($id)
     {
-        $roomType = RoomType::with(['hotel'])
+        $roomType = RoomType::with(['media'])
         ->where('hotel_id',$id)
         ->get();
 
@@ -22,15 +22,20 @@ class RoomTypesController extends Controller
     {
         $roomType = new RoomType($request->all());
         $roomType->save();
+        
+        foreach($request->file('pictures') as $picture){
+            $roomType->addMedia($picture)
+            ->toMediaCollection();
+        }
 
-        $roomType->load(['hotel']);
+        $roomType->load(['media']);
 
         return response()->json($roomType, 201);
     }
 
     public function show(Hotel $hotel, RoomType $roomType)
     {
-        $roomType->load(['hotel']);
+        $roomType->load(['media']);
         return response()->json($roomType);
     } 
 
@@ -39,7 +44,12 @@ class RoomTypesController extends Controller
         $roomType->fill($request->all());
         $roomType->save();
 
-        $roomType->load(['hotel']);
+        foreach($request->file('pictures', []) as $picture){
+            $roomType->addMedia($picture)
+            ->toMediaCollection();
+        }
+
+        $roomType->load(['media']);
         return response()->json($roomType);
     }
 

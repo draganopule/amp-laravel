@@ -58,7 +58,7 @@ class SearchRoomsController extends Controller
         $query->with(['hotel'])->withCount('rooms');
          
         $roomTypes = $query->get();
-         
+        $roomTypes->load(['media']);
          return response()->json($roomTypes);
     }
 }
