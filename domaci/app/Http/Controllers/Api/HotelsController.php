@@ -57,4 +57,10 @@ class HotelsController extends Controller
 
         return response()->noContent();
     }
+
+    public function deletePicture(Hotel $hotel, $pictureId)
+    {
+        $hotel->media()->where('id', $pictureId)->delete();
+        return response()->noContent();
+    }
 }
