@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::post('/auth/token','Api\Auth\RequestAccessTokensController@getAccessToken');
+Route::post('/auth/token/refresh','Api\Auth\RefreshAccessTokensController@refreshAccessToken');
 
 Route::middleware('PasswordFilter:api')->get('/students', function() {
     $students = [
