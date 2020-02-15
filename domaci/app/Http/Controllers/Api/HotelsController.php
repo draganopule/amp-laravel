@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\HotelResource;
 use App\Hotel;
 
 class HotelsController extends Controller
@@ -13,7 +14,7 @@ class HotelsController extends Controller
         $hotels = Hotel::with(['country', 'media'])
         ->get();
 
-        return response()->json($hotels);
+        return HotelResource::collection($hotels);
     }
 
     public function store(Request $request)
@@ -28,13 +29,13 @@ class HotelsController extends Controller
 
         $hotel->load(['country', 'media']);
 
-        return response()->json($hotel, 201);
+        return new HotelResource($hotel);
     }
 
     public function show(Hotel $hotel)
     {
         $hotel->load(['country', 'media']);
-        return response()->json($hotel);
+        return new HotelResource($hotel);
     } 
 
     public function update(Request $request, Hotel $hotel)
@@ -48,7 +49,7 @@ class HotelsController extends Controller
         }
 
         $hotel->load(['country', 'media']);
-        return response()->json($hotel);
+        return new HotelResource($hotel);
     }
 
     public function destroy(Hotel $hotel)

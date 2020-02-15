@@ -17,7 +17,7 @@ class Hotel extends Model implements HasMedia
         'star',
         'street_address',
         'city',
-        'country',
+        'country_id',
     ];
 
     public function country()

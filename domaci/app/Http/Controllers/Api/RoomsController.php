@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\RoomResource;
 use App\Room;
 use App\Hotel;
 
@@ -15,7 +16,7 @@ class RoomsController extends Controller
         ->where('hotel_id',$id)
         ->get();
 
-        return response()->json($rooms);
+        return RoomResource::collection($rooms);
     }
 
     public function store(Request $request)
@@ -25,13 +26,13 @@ class RoomsController extends Controller
 
         $room->load(['hotel','roomType']);
 
-        return response()->json($room, 201);
+        return new RoomResource($room);
     }
 
     public function show(Hotel $hotel, Room $room)
     {
         $room->load(['hotel','roomType']);
-        return response()->json($room);
+        return new RoomResource($room);
     } 
 
     public function update(Request $request, Hotel $hotel, Room $room)
@@ -40,7 +41,7 @@ class RoomsController extends Controller
         $room->save();
 
         $room->load(['hotel','roomType']);
-        return response()->json($room);
+        return new RoomResource($room);
     }
 
     public function destroy(Hotel $hotel, Room $room)
