@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\RoomTypeResource;
 use App\RoomType;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -59,6 +60,6 @@ class SearchRoomsController extends Controller
          
         $roomTypes = $query->get();
         $roomTypes->load(['media']);
-         return response()->json($roomTypes);
+        return RoomTypeResource::collection($roomTypes);
     }
 }
