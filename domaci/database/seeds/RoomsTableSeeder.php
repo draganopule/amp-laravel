@@ -35,47 +35,47 @@ class RoomsTableSeeder extends Seeder
         Room::create([
             'number' => 5,
             'hotel_id' => 1,
-            'room_type_id' => 5,
+            'room_type_id' => 3,
         ]);
         Room::create([
             'number' => 1,
             'hotel_id' => 2,
-            'room_type_id' => 6,
+            'room_type_id' => 4,
         ]);
         Room::create([
             'number' => 2,
             'hotel_id' => 2,
-            'room_type_id' => 6,
+            'room_type_id' => 4,
         ]);
         Room::create([
             'number' => 3,
             'hotel_id' => 2,
+            'room_type_id' => 5,
+        ]);
+        Room::create([
+            'number' => 4,
+            'hotel_id' => 2,
+            'room_type_id' => 6,
+        ]);
+        Room::create([
+            'number' => 1,
+            'hotel_id' => 3,
+            'room_type_id' => 7,
+        ]);
+        Room::create([
+            'number' => 2,
+            'hotel_id' => 3,
+            'room_type_id' => 7,
+        ]);
+        Room::create([
+            'number' => 3,
+            'hotel_id' => 3,
             'room_type_id' => 7,
         ]);
         Room::create([
             'number' => 4,
-            'hotel_id' => 2,
-            'room_type_id' => 9,
-        ]);
-        Room::create([
-            'number' => 1,
             'hotel_id' => 3,
-            'room_type_id' => 11,
-        ]);
-        Room::create([
-            'number' => 2,
-            'hotel_id' => 3,
-            'room_type_id' => 11,
-        ]);
-        Room::create([
-            'number' => 3,
-            'hotel_id' => 3,
-            'room_type_id' => 11,
-        ]);
-        Room::create([
-            'number' => 4,
-            'hotel_id' => 3,
-            'room_type_id' => 13,
+            'room_type_id' => 8,
         ]);
     }
 }
