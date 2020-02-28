@@ -20,6 +20,7 @@ class SearchHotelsController extends Controller
         if($request->has('country_id')){
             $query->where('country_id',$request->get('country_id'));
         }
+        
         $query->whereHas('roomTypes', function($fQuery) use ($request){
             if($request->has('number_of_beds_min')){
                 $fQuery->where('number_of_beds','>=', $request->get('number_of_beds_min'));
@@ -48,21 +49,8 @@ class SearchHotelsController extends Controller
         $queryStringParams = [
             'per_page' => $perPage
         ];
-        if($request->has('city')){
-            $queryStringParams['city'] = $request->get('city');
-        }
-        if($request->has('country_id')){
-            $queryStringParams['country_id'] = $request->get('country_id');
-        }
-        if($request->has('number_of_beds_min')){
-            $queryStringParams['number_of_beds_min'] = $request->get('number_of_beds_min');
-        }
-        if($request->has('number_of_bedrooms_min')){
-            $queryStringParams['number_of_bedrooms_min'] = $request->get('number_of_bedrooms_min');
-        }
-        if($request->has('number_of_guests_min')){
-            $queryStringParams['number_of_guests_min'] = $request->get('number_of_guests_min');
-        }
+        $queryStringParams = $request->only(['city', 'country_id', 'number_of_beds_min', 
+        'number_of_bedrooms_min', 'number_of_guests_min']);
 
         $hotels->appends($queryStringParams);
 
