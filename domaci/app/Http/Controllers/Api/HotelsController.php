@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\HotelResource;
 use App\Hotel;
+use App\Http\Requests\CreateHotelRequest;
+use App\Http\Requests\UpdateHotelRequest;
 
 class HotelsController extends Controller
 {
@@ -17,7 +19,7 @@ class HotelsController extends Controller
         return HotelResource::collection($hotels);
     }
 
-    public function store(Request $request)
+    public function store(CreateHotelRequest $request)
     {
         $hotel = new Hotel($request->all());
         $hotel->save();
@@ -38,7 +40,7 @@ class HotelsController extends Controller
         return new HotelResource($hotel);
     } 
 
-    public function update(Request $request, Hotel $hotel)
+    public function update(UpdateHotelRequest $request, Hotel $hotel)
     {
         $hotel->fill($request->all());
         $hotel->save();

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CountryResource;
+use App\Http\Requests\CreateCountryRequest;
+use App\Http\Requests\UpdateCountryRequest;
 use App\Country;
 
 class CountriesController extends Controller
@@ -16,7 +18,7 @@ class CountriesController extends Controller
         return CountryResource::collection($countries);
     }
 
-    public function store(Request $request)
+    public function store(CreateCountryRequest $request)
     {
         $country = new Country($request->all());
         $country->save();
@@ -30,7 +32,7 @@ class CountriesController extends Controller
         return new CountryResource($country);
     } 
 
-    public function update(Request $request, Country $country)
+    public function update(UpdateCountryRequest $request, Country $country)
     {
         $country->fill($request->all());
         $country->save();

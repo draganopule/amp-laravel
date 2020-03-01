@@ -79,10 +79,12 @@ Route::middleware('PasswordFilter')->delete('/students/{id}', function($id) {
 // Route::patch('/hotels/{hotel}', 'Api\HotelsController@update');
 // Route::delete('/hotels/{hotel}', 'Api\HotelsController@destroy');
 
-Route::get('/hotels/{hotel}/rooms/search', 'Api\SearchRoomsController@search');
-Route::get('/hotels/search', 'Api\SearchHotelsController@search');
-Route::apiResource('/hotels/{hotel}/room-types','Api\RoomTypesController');
-Route::apiResource('/hotels/{hotel}/rooms','Api\RoomsController');
-Route::patch('/hotels/{hotel}/{pictureId}', 'Api\HotelsController@deletePicture');
-Route::apiResource('/hotels','Api\HotelsController');
-Route::apiResource('/countries','Api\CountriesController');
+Route::group(['middleware' => 'auth:api', 'namespace' => 'Api'], function() {
+    Route::get('/hotels/{hotel}/rooms/search', 'SearchRoomsController@search');
+    Route::get('/hotels/search', 'SearchHotelsController@search');
+    Route::apiResource('/hotels/{hotel}/room-types','RoomTypesController');
+    Route::apiResource('/hotels/{hotel}/rooms','RoomsController');
+    Route::patch('/hotels/{hotel}/{pictureId}', 'HotelsController@deletePicture');
+    Route::apiResource('/hotels','HotelsController');
+    Route::apiResource('/countries','CountriesController');
+});
