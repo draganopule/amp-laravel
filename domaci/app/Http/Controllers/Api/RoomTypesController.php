@@ -21,7 +21,7 @@ class RoomTypesController extends Controller
         return RoomTypeResource::collection($roomTypes);
     }
 
-    public function store(CreateRoomTypeRequest $request, $hotelId)
+    public function store(CreateRoomTypeRequest $request, Hotel $hotel)
     {
         $roomType = new RoomType($request->all());
         $roomType->save();
@@ -42,7 +42,7 @@ class RoomTypesController extends Controller
         return new RoomTypeResource($roomType);
     } 
 
-    public function update(UpdateRoomTypeRequest $request, $hotelId, RoomType $roomType)
+    public function update(UpdateRoomTypeRequest $request, Hotel $hotel, RoomType $roomType)
     {
         $roomType->fill($request->all());
         $roomType->save();

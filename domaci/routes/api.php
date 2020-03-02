@@ -82,7 +82,7 @@ Route::middleware('PasswordFilter')->delete('/students/{id}', function($id) {
 Route::group(['middleware' => 'auth:api', 'namespace' => 'Api'], function() {
     Route::get('/hotels/{hotel}/rooms/search', 'SearchRoomsController@search');
     Route::get('/hotels/search', 'SearchHotelsController@search');
-    Route::apiResource('/hotels/{hotel}/room-types','RoomTypesController');
+    Route::apiResource('/hotels/{hotel}/room_types','RoomTypesController');
     Route::apiResource('/hotels/{hotel}/rooms','RoomsController');
     Route::patch('/hotels/{hotel}/{pictureId}', 'HotelsController@deletePicture');
     Route::apiResource('/hotels','HotelsController');

@@ -23,9 +23,9 @@ class CreateRoomRequest extends FormRequest
      */
     public function rules()
     {
-        $hotelId = $this->route('hotel');
+        $hotel = $this->route('hotel');
         return [
-            'number'  => "required|integer|unique:rooms,number,NULL,id,hotel_id,{$hotelId}",
+            'number'  => "required|integer|unique:rooms,number,NULL,id,hotel_id,{$hotel->id}",
             'hotel_id'  => 'required|integer|exists:hotels,id',
             'room_type_id'  => 'required|integer|exists:room_types,id',
         ];

@@ -23,11 +23,11 @@ class UpdateRoomTypeRequest extends FormRequest
      */
     public function rules()
     {
-        $roomType = $this->route('room-type');
-        $hotelId = $this->route('hotel');
+        $roomType = $this->route('room_type');
+        $hotel = $this->route('hotel');
         return [
             'name' => "required|string|max:250|
-                unique:room_types,name,{$roomType},id,hotel_id,$hotelId",
+                unique:room_types,name,{$roomType->id},id,hotel_id,{$hotel->id}",
             'number_of_beds' => 'integer|min:1',
             'number_of_bedrooms' => 'integer|min:1',
             'number_of_bathrooms' => 'integer|min:1',

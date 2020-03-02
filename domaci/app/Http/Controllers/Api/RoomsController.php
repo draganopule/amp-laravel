@@ -21,7 +21,7 @@ class RoomsController extends Controller
         return RoomResource::collection($rooms);
     }
 
-    public function store(CreateRoomRequest $request, $hotelId)
+    public function store(CreateRoomRequest $request, Hotel $hotel)
     {
         $room = new Room($request->all());
         $room->save();
@@ -37,7 +37,7 @@ class RoomsController extends Controller
         return new RoomResource($room);
     } 
 
-    public function update(UpdateRoomRequest $request, $hotelId, Room $room)
+    public function update(UpdateRoomRequest $request, Hotel $hotel, Room $room)
     {
         $room->fill($request->all());
         $room->save();

@@ -24,9 +24,9 @@ class UpdateRoomRequest extends FormRequest
     public function rules()
     {
         $room = $this->route('room');
-        $hotelId = $this->route('hotel');
+        $hotel = $this->route('hotel');
         return [
-            'number'  => "integer|unique:rooms,number,{$room->id},id,hotel_id,{$hotelId}",
+            'number'  => "integer|unique:rooms,number,{$room->id},id,hotel_id,{$hotel->id}",
             'hotel_id'  => 'integer|exists:hotels,id',
             'room_type_id'  => 'integer|exists:room_types,id',
         ];
